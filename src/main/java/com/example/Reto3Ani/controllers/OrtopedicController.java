@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Reto3Ani.entities.Ortopedic;
-import com.example.Reto3Ani.services.Ortopedic;
+import com.example.Reto3Ani.services.OrtopedicService;
 
 @Service
 @RestController
@@ -32,31 +32,31 @@ public class OrtopedicController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Ortopedic>> getOrtopedics(){
-        return new ResponseEntity<List<Ortopedic>>(this.ortopedicService.getListOrtopedics(), HttpStatus.OK);
+        return new ResponseEntity<>(this.ortopedicService.getListOrtopedics(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Ortopedic> getOrtopedic(@PathVariable("id") int id){
-        return new ResponseEntity<Ortopedic>(this.ortopedicService.getOrtopedic(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.ortopedicService.getOrtopedic(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> crearOrtopedic(@RequestBody Ortopedic ortopedic){
         System.out.println("Controller OK *************");
         this.ortopedicService.crearOrtopedic(ortopedic);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void>  eliminarOrtopedic(@PathVariable("id") int id){
         this.ortopedicService.eliminarOrtopedic(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Void>  actualizarOrtopedic(@RequestBody Ortopedic ortopedic){
         this.ortopedicService.actualizarOrtopedic(ortopedic.getId(), ortopedic);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
 

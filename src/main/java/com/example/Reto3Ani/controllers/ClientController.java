@@ -32,30 +32,30 @@ public class ClientController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Client>> getClients(){
-        return new ResponseEntity<List<Client>>(this.clientService.getListClients(), HttpStatus.OK);
+        return new ResponseEntity<>(this.clientService.getListClients(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Client> getClient(@PathVariable("id") int id){
-        return new ResponseEntity<Client>(this.clientService.getClient(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.clientService.getClient(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> crearClient(@RequestBody Client client){
         this.clientService.crearClient(client);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarClient(@PathVariable("id") int id){
         this.clientService.eliminarClient(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Void> actualizarClient(@RequestBody Client client){
         this.clientService.actualizarClient(client.getIdClient(), client);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
 

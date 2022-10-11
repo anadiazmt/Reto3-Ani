@@ -32,30 +32,30 @@ public class ReservationController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Reservation>> getReservations(){
-        return new ResponseEntity<List<Reservation>>(this.reservationService.getListReservations(), HttpStatus.OK);
+        return new ResponseEntity<>(this.reservationService.getListReservations(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Reservation> getReservation(@PathVariable("id") int id){
-        return new ResponseEntity<Reservation>(this.reservationService.getReservation(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.reservationService.getReservation(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> crearReservation(@RequestBody Reservation reservation){
         this.reservationService.crearReservation(reservation);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarReservation(@PathVariable("id") int id){
         this.reservationService.eliminarReservation(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Void> actualizarReservation(@RequestBody Reservation reservation){
         this.reservationService.actualizarReservation(reservation.getIdReservation(), reservation);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
 

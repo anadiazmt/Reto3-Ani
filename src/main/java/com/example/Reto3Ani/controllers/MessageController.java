@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.example.Reto3Ani.entities.Message;
 import com.example.Reto3Ani.services.MessageService;
 
@@ -33,30 +32,30 @@ public class MessageController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Message>> getMessages(){
-        return new ResponseEntity<List<Message>>(this.messageService.getListMessages(), HttpStatus.OK);
+        return new ResponseEntity<>(this.messageService.getListMessages(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Message> getMessage(@PathVariable("id") int id){
-        return new ResponseEntity<Message>(this.messageService.getMessage(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.messageService.getMessage(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> crearMessage(@RequestBody Message message){
         this.messageService.crearMessage(message);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarMessage(@PathVariable("id") int id){
         this.messageService.eliminarMessage(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Void> actualizarMessage(@RequestBody Message message){
         this.messageService.actualizarMessage(message.getIdMessage(), message);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
 
