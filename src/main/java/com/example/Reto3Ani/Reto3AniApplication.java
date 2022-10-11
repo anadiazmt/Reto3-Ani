@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Reto3AniApplication {
+public class Retos3AniApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Reto3AniApplication.class, args);
+		SpringApplication.run(Retos3AniApplication.class, args);
 	}
 
 }

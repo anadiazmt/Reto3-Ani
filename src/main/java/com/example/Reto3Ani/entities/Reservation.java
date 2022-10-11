@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "reservation")
@@ -23,7 +21,7 @@ public class Reservation implements Serializable{
     //***** ATRIBUTOS *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idReservation;
 
     @Column(name = "startDate")
     private Date startDate;
@@ -31,26 +29,33 @@ public class Reservation implements Serializable{
     @Column(name = "devolutionDate")
     private Date devolutionDate;
 
+    @Column(name = "status")
+    private String status;
+
     //***** RELACIONES *****
-    //Relacion Muchos a uno. La Reservation tiene enlazados un Client y Una ortesis
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //Relacion Muchos a uno. La Reservation tiene enlazados un Client y Un Farm
+
+    @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value = {"reservations"})
+	@JoinColumn(name = "ortopedic_id")
+	private Ortopedic ortopedic;
+
+    @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value = {"messages", "reservations"})
 	@JoinColumn(name = "client_id")
-	@JsonProperty(access = Access.WRITE_ONLY)
 	private Client client;
-    
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "ortesis_id")
-	@JsonProperty(access = Access.WRITE_ONLY)
-	private Ortesis ortesis;
+
+    @Column(name = "score")
+    private String score;
+
+    //***** CONSTRUCTOR *****
+    public Reservation() {
+        this.status = "created";
+        this.score = null;
+    }
+
 
     //***** METODOS *****
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Date getStartDate() {
         return startDate;
@@ -76,12 +81,39 @@ public class Reservation implements Serializable{
         this.client = client;
     }
 
-    public Ortesis getOrtesis() {
-        return ortesis;
+    public Ortopedic getOrtopedic() {
+        return ortopedic;
     }
 
-    public void setOrtesis(Ortesis ortesis) {
-        this.ortesis = ortesis;
+    public void setOrtopedic(Ortopedic ortopedic) {
+        this.ortopedic = ortopedic;
     }
+
+    public Integer getIdReservation() {
+        return idReservation;
+    }
+
+    public void setIdReservation(Integer idReservation) {
+        this.idReservation = idReservation;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    public String getScore() {
+        return score;
+    }
+
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+    
 
 }

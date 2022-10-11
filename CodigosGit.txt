@@ -49,5 +49,27 @@ export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 
 sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
 
-sudo firewall-cmd –reload
+sudo firewall-cmd –-reload
+
+///////////////////////////////////////////////////////////////////////////////////
+
+Git
+
+git clone urlRepos
+
+/// ingresar al repo con cd Carpeta_del repositorio 
+
+// COMPILAR
+
+mvn clean package -DskipTests
+
+// EJECUTAR
+
+java -jar target/EL_EJECUTABLE.jar
+
+(COMANDO IMPORTANTE: PARA VER ARCHIVOS Y CARPETAS DE DONDE ESTOY!!
+
+ls
+
+
 

@@ -13,7 +13,7 @@ import com.example.Reto3Ani.repositories.ClientRepository;
 public class ClientService {
     
         @Autowired
-        private final ClientRepository clientRepository;
+        private ClientRepository clientRepository;
 
         public ClientService(ClientRepository clientRepository) {
             this.clientRepository = clientRepository;
@@ -45,7 +45,18 @@ public class ClientService {
         public void actualizarClient(int id, Client client){
             if(!this.clientRepository.findById(id).isEmpty()){
                 Client clientDB = this.clientRepository.findById(id).get();
-
+                if(client.getName() != null){
+                    clientDB.setName(client.getName());
+                }
+                if(client.getEmail() != null){
+                    clientDB.setEmail(client.getEmail());
+                }
+                if(client.getPassword() != null){
+                    clientDB.setPassword(client.getPassword());
+                }
+                if(client.getAge() != null){
+                    clientDB.setAge(client.getAge());
+                }
                 this.clientRepository.save(clientDB);
             }
         }

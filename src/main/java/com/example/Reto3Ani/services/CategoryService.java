@@ -13,15 +13,11 @@ import com.example.Reto3Ani.repositories.CategoryRepository;
 public class CategoryService {
     
         @Autowired
-        private final CategoryRepository categoryRepository;
+        private CategoryRepository categoryRepository;
 
         public CategoryService(CategoryRepository categoryRepository) {
             this.categoryRepository = categoryRepository;
         }
-        //public List<Category> getAll() {
-        //    return categoryRepository.findAll();
-        //}
-    
 
         // METODOS CRUD
         public List<Category> getListCategorys(){
@@ -49,7 +45,13 @@ public class CategoryService {
         public void actualizarCategory(int id, Category category){
             if(!this.categoryRepository.findById(id).isEmpty()){
                 Category categoryDB = this.categoryRepository.findById(id).get();
-
+                
+                if(category.getName() != null){
+                    categoryDB.setName(category.getName());
+                }
+                if(category.getDescription() != null){
+                    categoryDB.setDescription(category.getDescription());
+                }
                 this.categoryRepository.save(categoryDB);
             }
         }

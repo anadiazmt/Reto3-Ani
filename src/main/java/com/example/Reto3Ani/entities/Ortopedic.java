@@ -11,44 +11,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@Table(name = "ortesis")
-public class Ortesis implements Serializable{
+@Table(name = "ortopedic")
+public class Ortopedic implements Serializable{
 
     //***** ATRIBUTOS *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "extension")
-    private String extension;
-
     @Column(name = "name")
     private String name;
+
+    @Column(name = "brand")
+    private String brand;
+
+    @Column(name = "years")
+    private Integer year;
 
     @Column(name = "description")
     private String description;
 
     //***** RELACIONES *****
-    //Relación uno a uno. Una Ortesis tiene un Category relacionada.
-    @OneToOne
+    //Relación uno a uno. Una Farm tiene un Category relacionada.
+    @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value = {"ortopedics"})
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-    // Una Ortesis puede tener muchas Reservation y Messages.
-    @OneToMany(mappedBy = "ortesis", cascade = CascadeType.ALL)
-    private Set<Reservation> reservations = new HashSet<>();
-
-    @OneToMany(mappedBy = "ortesis", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ortopedic", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {"client", "ortopedic"})
     private Set<Message> messages = new HashSet<>();
+
+    @OneToMany(mappedBy = "ortopedic", cascade = CascadeType.ALL)
+    private Set<Reservation> reservations = new HashSet<>();
 
 
     //***** METODOS *****
@@ -60,21 +63,14 @@ public class Ortesis implements Serializable{
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
 
     public String getName() {
         return name;
@@ -114,6 +110,14 @@ public class Ortesis implements Serializable{
 
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     

@@ -13,7 +13,7 @@ import com.example.Reto3Ani.repositories.ReservationRepository;
 public class ReservationService {
     
         @Autowired
-        private final ReservationRepository reservationRepository;
+        private ReservationRepository reservationRepository;
 
         public ReservationService(ReservationRepository reservationRepository) {
             this.reservationRepository = reservationRepository;
