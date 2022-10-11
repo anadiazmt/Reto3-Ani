@@ -14,7 +14,7 @@
 	<name>Reto3Ani</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -50,6 +50,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+			
 		</dependency>
 
 		<!-- Autenticación -->
