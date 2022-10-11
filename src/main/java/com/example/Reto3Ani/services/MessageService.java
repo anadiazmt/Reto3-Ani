@@ -13,7 +13,7 @@ import com.example.Reto3Ani.repositories.MessageRepository;
 public class MessageService {
     
         @Autowired
-        private final  MessageRepository messageRepository;
+        private MessageRepository messageRepository;
 
         public MessageService(MessageRepository messageRepository) {
             this.messageRepository = messageRepository;
