@@ -1,9 +1,7 @@
 package com.example.Reto3Ani.controllers;
 
-import java.util.Date;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,30 +35,30 @@ public class ReservationController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Reservation>> getReservations(){
-        return new ResponseEntity<>(this.reservationService.getListReservations(), HttpStatus.OK);
+        return new ResponseEntity<List<Reservation>>(this.reservationService.getListReservations(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Reservation> getReservation(@PathVariable("id") int id){
-        return new ResponseEntity<>(this.reservationService.getReservation(id), HttpStatus.OK);
+        return new ResponseEntity<Reservation>(this.reservationService.getReservation(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> crearReservation(@RequestBody Reservation reservation){
         this.reservationService.crearReservation(reservation);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarReservation(@PathVariable("id") int id){
         this.reservationService.eliminarReservation(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Void> actualizarReservation(@RequestBody Reservation reservation){
         this.reservationService.actualizarReservation(reservation.getIdReservation(), reservation);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
     
     @GetMapping("/report-dates/{start}/{end}")
@@ -76,7 +74,7 @@ public class ReservationController {
     @GetMapping("/report-clients")
     public ResponseEntity<Object> getReservationsClients(){
         List<Client> clientList = this.reservationService.getReservationsClients();
-        return new ResponseEntity<>(clientList, HttpStatus.OK);
+        return new ResponseEntity<Object>(clientList, HttpStatus.OK);
     }
 
 }
