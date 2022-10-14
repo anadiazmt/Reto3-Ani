@@ -1,11 +1,18 @@
 package com.example.Reto3Ani.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Reto3Ani.entities.Client;
 import com.example.Reto3Ani.entities.Reservation;
+import com.example.Reto3Ani.repositories.ClientRepository;
 import com.example.Reto3Ani.repositories.ReservationRepository;
 
 
@@ -15,9 +22,44 @@ public class ReservationService {
         @Autowired
         private ReservationRepository reservationRepository;
 
+        @Autowired
+        private ClientRepository clientRepository;
+
         public ReservationService(ReservationRepository reservationRepository) {
             this.reservationRepository = reservationRepository;
         }
+
+        // ****** INICIO REPORTES ******
+        public List<Reservation> getReservationsBetweenTime(String start, String end){
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd", Locale.ENGLISH);
+            formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+            List<Reservation> result = null;
+            try {
+                Date startDate = formatter.parse(start);
+                Date endDate = formatter.parse(end);
+                result = this.reservationRepository.findByStartDateBetween(startDate, endDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        public String getReservationsStatus(){
+            List<Reservation> completed = this.reservationRepository.findByStatus("completed");
+            List<Reservation> cancelled = this.reservationRepository.findByStatus("cancelled");
+            String result = "{"+"\"completed\":"+completed.size()+","
+                            + "\"cancelled\":"+cancelled.size()
+                            + "}";
+            return result;
+        }
+
+        public List<Client> getReservationsClients(){
+            return this.clientRepository.findAll();
+        }
+
+
+        // ****** FIN REPORTES ******
 
         // METODOS CRUD
         public List<Reservation> getListReservations(){
