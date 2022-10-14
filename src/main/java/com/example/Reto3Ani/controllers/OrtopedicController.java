@@ -32,7 +32,7 @@ public class OrtopedicController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Ortopedic>> getOrtopedics(){
-        return new ResponseEntity<>(this.ortopedicService.getListOrtopedics(), HttpStatus.OK);
+        return new ResponseEntity<>(this.OrtopedicService.getListOrtopedics(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
