@@ -120,5 +120,4 @@ public class Ortopedic implements Serializable{
         this.year = year;
     }
 
-    
 }

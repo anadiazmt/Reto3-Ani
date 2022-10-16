@@ -1,7 +1,6 @@
 package com.example.Reto3Ani.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Reto3Ani.entities.Client;
+import com.example.Reto3Ani.entities.ReportClient;
 import com.example.Reto3Ani.entities.Reservation;
 import com.example.Reto3Ani.services.ReservationService;
 
@@ -72,9 +71,9 @@ public class ReservationController {
     }
 
     @GetMapping("/report-clients")
-    public ResponseEntity<Object> getReservationsClients(){
-        List<Client> clientList = this.reservationService.getReservationsClients();
-        return new ResponseEntity<Object>(clientList, HttpStatus.OK);
+    public ResponseEntity<List<ReportClient>> getReservationsClients(){
+        List<ReportClient> clientList = this.reservationService.getReservationsReportClients();
+        return new ResponseEntity<List<ReportClient>>(clientList, HttpStatus.OK);
     }
 
 }
