@@ -2,6 +2,7 @@ package com.example.Reto3Ani.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -43,7 +44,7 @@ public class Client implements Serializable{
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"client"})
-    private Set<Reservation> reservations = new HashSet<>();
+    private Set<Reservation> reservations = new LinkedHashSet<>();
 
     
 
