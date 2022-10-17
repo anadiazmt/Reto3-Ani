@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +32,7 @@ public class ReportClient{
             }
           });
         
-        Set<Reservation> hSet = new HashSet<Reservation>(arr);
+        Set<Reservation> hSet = new LinkedHashSet<Reservation>(arr);
         this.client.setReservations(hSet);
         this.total = client.getReservations().size();
     }
